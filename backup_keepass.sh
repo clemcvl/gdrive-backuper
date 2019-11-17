@@ -6,10 +6,8 @@ declare -a arr=("keepass_work.kdbx" "keepass.kdbx")
 for file_name in "${arr[@]}"                                                                                                                                                                                   
 do                                                                                                                                                                                                             
         file_id=`gdrive list |grep $file_name |awk '{ print $1 }'`                                                                                                                                             
-        gdrive download $file_id --force                                                                                                                                                                       
-        #mv $file_name `keepass.kdbx |awk -F '.' '{print $1}'                                                                                                                                                  
-        new_file_name=`echo $file_name |awk -F '.' '{print $1}'`_$(date '+%Y-%m-%d').`echo $file_name |awk -F '.' '{print $2}'`                                                                                
-        #mv $file_name `echo $file_name |awk -F '.' '{print $1}'`_$(date '+%Y-%m-%d').`echo $file_name |awk -F '.' '{print $2}'`                                                                               
+        gdrive download $file_id --force                                                                                                                                                                      
+        new_file_name=`echo $file_name |awk -F '.' '{print $1}'`_$(date '+%Y-%m-%d').`echo $file_name |awk -F '.' '{print $2}'
         mv $file_name $new_file_name                                                                                                                                                                           
         ln -s -f /home/chevalier/keepass_backups/$new_file_name /home/chevalier/$file_name                                                                                                                     
         sleep 1                                                                                                                                                                                                
